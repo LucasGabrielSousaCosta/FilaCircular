@@ -1,0 +1,127 @@
+public class filaCircular {
+    int contAdd=0,contRemove=0,N;
+    int vetor[];
+    int in=0,out=0;
+
+    public filaCircular(int N){
+        this.N = N;
+        vetor = new int[N];
+        for (int i=in; i<=out;i++)
+        {
+            vetor[i] = -1;
+        }
+    }
+
+    public void add(int v){
+        if(isFull())
+        {
+            out++;
+        }
+        in = in%N;
+        contAdd ++;
+        vetor[in] = v;
+        in++;
+    }
+
+    public boolean isEmpty()
+    {
+        if (in == out)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isFull()
+    {
+        int vazios=0;
+        if(in+1 == out)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public int remove()
+    {
+        if(isEmpty())
+        {
+            return -1;
+        }
+        else
+        {
+            out = out%N;
+            vetor[out] = -1;
+            out++;
+            contRemove++;
+            return 0;
+        }
+    }
+
+    public void print()
+    {
+        if(isEmpty())
+        {
+            System.out.print("Lista vazia");
+        }
+        for (int i=in; i<=out;i++)
+        {
+            System.out.print(vetor[i]+" ");
+        }
+        System.out.println();
+    }
+
+    public int peek(){
+        return vetor[out];
+    }
+
+    public int peekAdd()//utilizado para verificar o valor substituido no add
+    {
+        return vetor[contAdd%N];
+    }
+
+    public int peekRemove()//utilizado para verificar o valor substituido no remove
+    {
+        return vetor[contRemove%N];
+    }
+
+    public int getContAdd(){
+        return contAdd;
+    }
+
+    public int getContRemove(){
+        return contRemove;
+    }
+
+    public int size(){
+        return N;
+    }
+
+    public void clear()
+    {
+        for (int i=in; i<=out;i++)
+        {
+            remove();
+        }
+    }
+
+    public boolean contains(int v)
+    {
+        for (int i=in; i<=out;i++)
+        {
+            if(vetor[i] == v)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getIn() {
+        return in;
+    }
+
+    public int getOut() {
+        return out;
+    }
+}
