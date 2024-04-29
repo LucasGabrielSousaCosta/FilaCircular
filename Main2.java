@@ -1,0 +1,123 @@
+import java.util.Scanner;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        filaCircular FilaCircular = new filaCircular(4);
+        int opc, valor;
+        Scanner entrada = new Scanner(System.in);
+        do{
+            System.out.print("Menu:\n"+
+                            "1. Adicionar\n"+
+                            "2. Remover\n"+
+                            "3. Print\n"+
+                            "4. Está vazia\n"+
+                            "5. Está cheia\n"+
+                            "6. Contem\n"+
+                            "7. Peek\n"+
+                            "8. Size\n"+
+                            "9. Clear\n"+
+                            "0. Sair\n"+
+                            "Digite sua escolha:");
+            opc = entrada.nextInt();
+            System.out.println();
+            switch(opc)
+            {
+                case 1:{
+                    char adicionar;
+                    System.out.printf("Espaço da posição %d contém o valor %d, deseja substituir(S/N):",FilaCircular.getIn() ,FilaCircular.peekAdd());
+                    adicionar = entrada.next().charAt(0);
+                    adicionar = Character.toUpperCase(adicionar);
+                    if(adicionar == 'S')
+                    {
+                        System.out.printf("Digite o valor para inserir no próximo espaço vazio:");
+                        valor = entrada.nextInt();
+                        FilaCircular.add(valor);
+                    }
+                    System.out.println();
+                    break;
+                }
+                case 2:{
+                    char remover;
+                    System.out.printf("Espaço da posição %d contém o valor %d, deseja remover(S/N):",FilaCircular.getOut() ,FilaCircular.peekRemove());
+                    remover = entrada.next().charAt(0);
+                    remover = Character.toUpperCase(remover);
+                    if(remover == 'S')
+                    {
+                        FilaCircular.remove();
+                    }
+                    System.out.println();
+                    break;
+                }
+                case 3:{
+                    FilaCircular.print();
+                    System.out.println();
+                    System.out.printf("IN:%d, OUT:%d, Quantidade de adições:%d, Quantidade de remoções:%d"
+                    ,FilaCircular.getIn(),FilaCircular.getOut(),FilaCircular.getContAdd(),FilaCircular.getContRemove());
+                    System.out.println("\n");
+                    break;
+                }
+                case 4:{
+                    if(FilaCircular.isEmpty())
+                    {
+                        System.out.println("Fila vazia.");
+                    }
+                    else
+                    {
+                        System.out.println("Não está vazia.");
+                    }
+                    System.out.println();
+                    break;
+                }
+                case 5:{
+                    if(FilaCircular.isFull())
+                    {
+                        System.out.println("Fila cheia.");
+                    }
+                    else
+                    {
+                        System.out.println("Não está cheia.");
+                    }
+                    System.out.println();
+                    break;
+                }
+                case 6:{
+                    System.out.print("Digite um valor para verificar se ele existe na lista:");
+                    valor = entrada.nextInt();
+                    if(FilaCircular.contains(valor))
+                    {
+                        System.out.println("A fila contém o valor.");
+                    }
+                    else
+                        System.out.println("A fila não contém o valor.");
+                    System.out.println();
+                    break;
+                }
+                case 7:{
+                    System.out.println(FilaCircular.peek());
+                    System.out.println();
+                    break;
+                }
+                case 8:{
+                    System.out.println(FilaCircular.size());
+                    System.out.println();
+                    break;
+                }
+                case 9:{
+                    FilaCircular.clear();
+                    System.out.println();
+                    break;
+                }
+                case 0:{
+                    System.out.println("Saindo...");
+                    break;
+                }
+                default:{
+                    System.out.println("Opção inválida.");
+                    System.out.println();
+                }
+            } 
+        }while(opc != 0);
+    }
+}
